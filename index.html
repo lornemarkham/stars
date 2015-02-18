@@ -6,9 +6,10 @@
 </head> 
 <body>
 
+<div id="high-five"></div>
 <div class="star-contain">
     <div  class="percent-you-like"></div>
-    <div  class="overall-rating">OVERALL RATING 1</div> 
+    <div  class="overall-rating">OVERALL RATING <span>1</span> / <span>10</span> reviews</div> 
     <span class="stars background-stars"  data-content=""></span>
     <span class="stars your-rating" data-content=""></span>
     <span class="stars current-rating" data-content="" style="width:20%;"></span>
@@ -36,7 +37,20 @@ var starCont = $('.star-contain');
         $('.percent-you-like').css( 'left', inStarCont );
         $('.your-rating').css('width', inStarCont);
 
+        // if < 2 why
+        // else if < why 
+        // else if < why
+        // else thanks for loving it, please share what you like
+        console.log(inStarCont);
         $(starCont).mousedown(function(e){
+            if(inStarCont > 120){
+                $('#high-five').addClass('on');
+                console.log("if worked");
+            }
+            else{
+                $('#high-five').removeClass('on');
+            }
+
             $('.current-rating').css('width', inStarCont);
         });
 
