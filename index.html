@@ -6,17 +6,19 @@
 </head> 
 <body>
 
-<div id="high-five"></div>
+<div id="feedback" class="">
+    <div class="bad">Please send us feedback on how we can better service you in the future</div>
+    <div class="good">Glad you enjoyed our product, help us improve</div>
+    <div class="great">high fives, tell your friends for discounts</div>
+</div>
 <div class="star-contain">
+    <div class="disabled-container"></div>
     <div  class="percent-you-like"></div>
-    <div  class="overall-rating">OVERALL RATING <span>1</span> / <span>10</span> reviews</div> 
+    <div  class="overall-rating">OVERALL RATING <span>1</span> / <span>10</span>reviews</div> 
     <span class="stars background-stars"  data-content=""></span>
     <span class="stars your-rating" data-content=""></span>
     <span class="stars current-rating" data-content="" style="width:20%;"></span>
 </div>
-
-
-
 
 <script>
 
@@ -31,26 +33,29 @@ var starCont = $('.star-contain');
             inStarCont = fromLeft - offset.left;
             hoverPercent = parseInt((inStarCont / starW) * 100);
             userFraction = (hoverPercent / 10.0) / 2;
-            test = userFraction.toFixed(1);
+            test = userFraction.toFixed(1); //fix this LJM
 
         $('.percent-you-like').text( test );
         $('.percent-you-like').css( 'left', inStarCont );
         $('.your-rating').css('width', inStarCont);
 
-        // if < 2 why
-        // else if < why 
-        // else if < why
-        // else thanks for loving it, please share what you like
-        console.log(inStarCont);
         $(starCont).mousedown(function(e){
-            if(inStarCont > 120){
-                $('#high-five').addClass('on');
-                console.log("if worked");
-            }
-            else{
-                $('#high-five').removeClass('on');
+            if(test < 3){
+                $('#feedback').removeClass();
+                $('#feedback').addClass('feedback-bad on');
+
             }
 
+            else if(test < 4){
+                $('#feedback').removeClass();
+                $('#feedback').addClass('feedback-good on');
+            }
+            else{
+                $('#feedback').removeClass();
+                $('#feedback').addClass('feedback-great on');
+            }
+
+            $(starCont).addClass('disabled');
             $('.current-rating').css('width', inStarCont);
         });
 

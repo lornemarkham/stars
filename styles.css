@@ -68,8 +68,39 @@ body {margin:0; padding:0;}
 
     /*nonsense*/
 
-#high-five {height:556px; width:600px; background: url(images/internet-high-five.png) no-repeat top left; position: absolute; top:10%; left:50%; margin: 0 0 0 -300px; opacity: 0; transition: all 1s ease;}
-#high-five.on {opacity:1;}
+#feedback {height:556px; width:600px;  position: absolute; top:10%; left:50%; margin: 0 0 0 -300px; opacity: 0; transition: all 0.5s ease;}
+#feedback.on {opacity:1;}
+
+.disabled-container {position: absolute; top:0; left:0; height:100%; width:100%; z-index:9; display: none;}
+.disabled .disabled-container {display: block;}
+.star-contain.disabled  {pointer-events: none;}
+
+.bad, .good, .great {display: none;}
+.feedback-bad {opacity:1;}
+    .feedback-bad .bad {display:block;}
+
+.feedback-good {opacity:1;}
+    .feedback-good .good {display:block;}
+
+.feedback-great {opacity:1;}
+    .feedback-great .great {display:block; height: 556px; background: url(images/internet-high-five.png) no-repeat top left;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
