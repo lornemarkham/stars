@@ -1,22 +1,26 @@
-body {margin:0; padding:0;}
+body {margin:300px 0 100px 300px; padding:0;}
 
     .star-contain {
         position: relative;
         display: block;
-        margin: 300px 0 100px 300px;
+        margin:0;
         padding: 0;
         width: 160px; /* same as star image */
         height: 30px; /* same as star image */
         cursor: pointer;
+        border-radius: 4px;
     }
+
+    .star-contain:hover {}
 
     .star-contain > * {
         position: absolute;
     }
 
     .percent-you-like {
-        top:-20px; font-size: 14px; color: #333; font-family: arial; pointer-events: none;
+        width: 40px; top:-20px; font-size: 14px; color: #333; font-family: arial; pointer-events: none;
     }
+    .percent-you-like > div {float: left; width:20px;}
 
     .overall-rating {height:30px; width:138px; bottom:-40px; left:0; font-size:10px; font-family: arial;}
 
@@ -84,9 +88,6 @@ body {margin:0; padding:0;}
 
 .feedback-great {opacity:1;}
     .feedback-great .great {display:block; height: 556px; background: url(images/internet-high-five.png) no-repeat top left;}
-
-
-
 
 
 

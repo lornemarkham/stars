@@ -5,6 +5,7 @@
      <script src="jquery-1.11.2.min.js"></script>
 </head> 
 <body>
+   
 
 <div id="feedback" class="">
     <div class="bad">Please send us feedback on how we can better service you in the future</div>
@@ -13,12 +14,15 @@
 </div>
 <div class="star-contain">
     <div class="disabled-container"></div>
-    <div  class="percent-you-like"></div>
-    <div  class="overall-rating">OVERALL RATING <span>1</span> / <span>10</span>reviews</div> 
+    <div  class="percent-you-like"><div class="number"></div><div class="reaction">:(:</div>  </div>
+    <div  class="overall-rating">Rating: <span>1</span> - <span>10 reviews</span></div> 
     <span class="stars background-stars"  data-content=""></span>
     <span class="stars your-rating" data-content=""></span>
     <span class="stars current-rating" data-content="" style="width:20%;"></span>
 </div>
+
+
+
 
 <script>
 
@@ -27,6 +31,7 @@ function starAction(){
 var starCont = $('.star-contain');
     offset = starCont.offset();
     starW = starCont.width();
+    percentYouLike =   $('.percent-you-like');
 
     $(starCont).mousemove(function(e){
         var fromLeft = e.pageX;
@@ -35,9 +40,15 @@ var starCont = $('.star-contain');
             userFraction = (hoverPercent / 10.0) / 2;
             test = userFraction.toFixed(1); //fix this LJM
 
-        $('.percent-you-like').text( test );
-        $('.percent-you-like').css( 'left', inStarCont );
+        $('.number').text( test );
+        $(percentYouLike).css( 'left', inStarCont );
         $('.your-rating').css('width', inStarCont);
+
+
+
+        var rotate = hoverPercent -270; //needs to rotate a little more - LJM
+
+        $('.reaction').css('transform','rotate('+rotate+'deg)');
 
         $(starCont).mousedown(function(e){
             if(test < 3){
