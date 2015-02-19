@@ -52,6 +52,11 @@ $( "form" ).change(function() {
     $('.current-rating').css('width', inputAverageRating * 32);
     $('.average-rating').text(inputAverageRating);
     $('.average-votes').text(inputNumberVotes);
+
+    // calculate the new star rating average
+    var currentAddedUp = inputAverageRating * inputNumberVotes;
+    console.log(currentAddedUp);
+
 }).change();
 
     $(starCont).mousemove(function(e){
@@ -90,6 +95,7 @@ $( "form" ).change(function() {
 
             $(starCont).addClass('disabled');
             $('.current-rating').css('width', inStarCont);
+            console.log(currentAddedUp);
         });
 
 
