@@ -5,7 +5,14 @@
      <script src="jquery-1.11.2.min.js"></script>
 </head> 
 <body>
-   
+
+<form>
+What is the current average rating <br>
+<input class="input-average-rating" type="number" min="1" max="5" step="1" value="3" name="average-rating">
+<br>
+How many peopl have voted<br>
+<input class="input-number-votes" type="number" min="1" max="99" step="1" value="50" name="number-votes">
+</form>
 
 <div id="feedback" class="">
     <div class="bad">Please send us feedback on how we can better service you in the future</div>
@@ -15,10 +22,11 @@
 <div class="star-contain">
     <div class="disabled-container"></div>
     <div  class="percent-you-like"><div class="number"></div><div class="reaction">:(:</div>  </div>
-    <div  class="overall-rating">Rating: <span>1</span> - <span>10 reviews</span></div> 
+    <div  class="overall-rating">Rating: <span class="average-rating">1</span> - <span class="average-votes">10</span> reviews</div> 
     <span class="stars background-stars"  data-content=""></span>
+    
+    <span class="stars current-rating" data-content="" style=""></span>
     <span class="stars your-rating" data-content=""></span>
-    <span class="stars current-rating" data-content="" style="width:20%;"></span>
 </div>
 
 
@@ -29,21 +37,36 @@
 function starAction(){
 
 var starCont = $('.star-contain');
-    offset = starCont.offset();
-    starW = starCont.width();
-    percentYouLike =   $('.percent-you-like');
+var offset = starCont.offset();
+var starW = starCont.width();
+var percentYouLike =   $('.percent-you-like');
+var x = $('.current-rating').css('width');
+var currentRating = parseInt(x, 10); 
+
+
+$( "form" ).change(function() {
+
+    var inputAverageRating = $('.input-average-rating').val();
+    var inputNumberVotes = $('.input-number-votes').val();
+
+    $('.current-rating').css('width', inputAverageRating * 32);
+    $('.average-rating').text(inputAverageRating);
+    $('.average-votes').text(inputNumberVotes);
+}).change();
 
     $(starCont).mousemove(function(e){
         var fromLeft = e.pageX;
-            inStarCont = fromLeft - offset.left;
-            hoverPercent = parseInt((inStarCont / starW) * 100);
-            userFraction = (hoverPercent / 10.0) / 2;
-            test = userFraction.toFixed(1); //fix this LJM
+        var inStarCont = fromLeft - offset.left;
+        var hoverPercent = parseInt((inStarCont / starW) * 100);
+        var userFraction = (hoverPercent / 10.0) / 2;
+        var test = userFraction.toFixed(1); //fix this LJM
+        
+
+        
 
         $('.number').text( test );
         $(percentYouLike).css( 'left', inStarCont );
         $('.your-rating').css('width', inStarCont);
-
 
 
         var rotate = hoverPercent -270; //needs to rotate a little more - LJM
@@ -54,7 +77,6 @@ var starCont = $('.star-contain');
             if(test < 3){
                 $('#feedback').removeClass();
                 $('#feedback').addClass('feedback-bad on');
-
             }
 
             else if(test < 4){
@@ -69,6 +91,16 @@ var starCont = $('.star-contain');
             $(starCont).addClass('disabled');
             $('.current-rating').css('width', inStarCont);
         });
+
+
+        // the idea here was to possibly change the color of the highlighted hover, didn't really work out 
+        if (currentRating > inStarCont){
+            $('.your-rating').css({'background-color': 'white', 'opacity' : '.5'});
+        }
+        else{
+            $('.your-rating').css({'background-color': 'white', 'opacity' : '.4'});
+        }
+
 
         $(starCont).mouseout(function(){
             // $( '.your-rating').css('width', 0);

@@ -1,9 +1,9 @@
-body {margin:300px 0 100px 300px; padding:0;}
+body {margin:0;}
 
     .star-contain {
         position: relative;
         display: block;
-        margin:0;
+        margin:100px auto;
         padding: 0;
         width: 160px; /* same as star image */
         height: 30px; /* same as star image */
@@ -39,14 +39,12 @@ body {margin:300px 0 100px 300px; padding:0;}
         content: "\e600 \e600 \e600 \e600 \e600";
     }
 
-    .your-rating { background: linear-gradient(#fff , #fff); opacity:0.5; /*transition: all 0.3s linear;*/}
+    .your-rating {/* background: linear-gradient(#fff , #fff); */opacity:0.5; /*transition: all 0.3s linear;*/}
     .your-rating:before {
         font-size:32px;
         color: #fff;
         content: "\e600 \e600 \e600 \e600 \e600";
     }
-
-    
 
     .current-rating {background: linear-gradient(#FFFF00 , #FFBF02); opacity:1; transition: all 1s ease;}
     .current-rating:before {
@@ -55,7 +53,11 @@ body {margin:300px 0 100px 300px; padding:0;}
         content: "\e600 \e600 \e600 \e600 \e600";
     }
 
-
+    form {
+        width:200px; margin:100px auto 0 auto; font-size:12px; font-family: arial; color: #999; text-align: center;
+    }
+    form input { height:80px; width:80px; margin:12px 0 30px 0; font-size:68px; color: #555; text-align: center;}
+    form input.input-number-votes {width:120px;}
 
 
 
@@ -72,7 +74,7 @@ body {margin:300px 0 100px 300px; padding:0;}
 
     /*nonsense*/
 
-#feedback {height:556px; width:600px;  position: absolute; top:10%; left:50%; margin: 0 0 0 -300px; opacity: 0; transition: all 0.5s ease;}
+#feedback {height:556px; width:600px; pointer-events: none;  position: absolute; top:10%; left:50%; margin: 0 0 0 -300px; opacity: 0; transition: all 0.5s ease;}
 #feedback.on {opacity:1;}
 
 .disabled-container {position: absolute; top:0; left:0; height:100%; width:100%; z-index:9; display: none;}
@@ -80,13 +82,13 @@ body {margin:300px 0 100px 300px; padding:0;}
 .star-contain.disabled  {pointer-events: none;}
 
 .bad, .good, .great {display: none;}
-.feedback-bad {opacity:1;}
+.feedback-bad {opacity:1; pointer-events: none;}
     .feedback-bad .bad {display:block;}
 
-.feedback-good {opacity:1;}
+.feedback-good {opacity:1; pointer-events: none;}
     .feedback-good .good {display:block;}
 
-.feedback-great {opacity:1;}
+.feedback-great {opacity:1; pointer-events: none;}
     .feedback-great .great {display:block; height: 556px; background: url(images/internet-high-five.png) no-repeat top left;}
 
 
