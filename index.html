@@ -40,33 +40,54 @@ var starCont = $('.star-contain');
 var offset = starCont.offset();
 var starW = starCont.width();
 var percentYouLike =   $('.percent-you-like');
+
+// change percentage into fraction
 var x = $('.current-rating').css('width');
 var currentRating = parseInt(x, 10); 
 
+// vars that will be coming from the DB - for presentation only
+inputAverageRating = $('.input-average-rating').val();
+inputNumberVotes = $('.input-number-votes').val();
 
-$( "form" ).change(function() {
 
-    var inputAverageRating = $('.input-average-rating').val();
-    var inputNumberVotes = $('.input-number-votes').val();
 
-    $('.current-rating').css('width', inputAverageRating * 32);
-    $('.average-rating').text(inputAverageRating);
-    $('.average-votes').text(inputNumberVotes);
+changeNumbersFromDB();
+mouseHoveringStars();   
+mouseDownonStars();
 
-    // calculate the new star rating average
-    var currentAddedUp = inputAverageRating * inputNumberVotes;
-    console.log(currentAddedUp);
 
-}).change();
 
+
+// TEMP FUNCTION TO FAKE NUMBERS COMING FROM DB
+function changeNumbersFromDB(){ 
+    $( "form" ).change(function() {
+
+        // var inputAverageRating = $('.input-average-rating').val();
+        // var inputNumberVotes = $('.input-number-votes').val();
+
+        inputAverageRating = $('.input-average-rating').val();
+        inputNumberVotes =  $('.input-number-votes').val();
+
+        $('.current-rating').css('width', inputAverageRating * 32);
+        $('.average-rating').text(inputAverageRating);
+        $('.average-votes').text(inputNumberVotes);
+
+        // calculate the new star rating average
+        var currentAddedUp = inputAverageRating * inputNumberVotes;
+        console.log(currentAddedUp);
+    }).change(); 
+}
+
+
+
+// ANYTHING THAT HAPPENS WHILE HOVERING OVER STARS
+function mouseHoveringStars(){
     $(starCont).mousemove(function(e){
         var fromLeft = e.pageX;
-        var inStarCont = fromLeft - offset.left;
+        inStarCont = fromLeft - offset.left;
         var hoverPercent = parseInt((inStarCont / starW) * 100);
         var userFraction = (hoverPercent / 10.0) / 2;
-        var test = userFraction.toFixed(1); //fix this LJM
-        
-
+        test = userFraction.toFixed(1); //fix this LJM
         
 
         $('.number').text( test );
@@ -74,29 +95,8 @@ $( "form" ).change(function() {
         $('.your-rating').css('width', inStarCont);
 
 
-        var rotate = hoverPercent -270; //needs to rotate a little more - LJM
-
+        var rotate = hoverPercent -220; //needs to rotate a little more - LJM
         $('.reaction').css('transform','rotate('+rotate+'deg)');
-
-        $(starCont).mousedown(function(e){
-            if(test < 3){
-                $('#feedback').removeClass();
-                $('#feedback').addClass('feedback-bad on');
-            }
-
-            else if(test < 4){
-                $('#feedback').removeClass();
-                $('#feedback').addClass('feedback-good on');
-            }
-            else{
-                $('#feedback').removeClass();
-                $('#feedback').addClass('feedback-great on');
-            }
-
-            $(starCont).addClass('disabled');
-            $('.current-rating').css('width', inStarCont);
-            console.log(currentAddedUp);
-        });
 
 
         // the idea here was to possibly change the color of the highlighted hover, didn't really work out 
@@ -117,7 +117,43 @@ $( "form" ).change(function() {
             } 
         });
     });     
+}    
+
+
+
+
+
+//WHEN YOU CLICK ON THE STARS UPDATE VALUES
+    function mouseDownonStars() {
+        $(starCont).mousedown(function(e){
+             if(test < 3){
+                $('#feedback').removeClass();
+                $('#feedback').addClass('feedback-bad on');
+            }
+
+            else if(test < 4){
+                $('#feedback').removeClass();
+                $('#feedback').addClass('feedback-good on');
+            }
+            else{
+                $('#feedback').removeClass();
+                $('#feedback').addClass('feedback-great on');
+            }
+
+            
+            var newNumberofRatings = parseInt(inputNumberVotes) + 1;
+            $('.average-votes').text(newNumberofRatings);
+            $('.overall-rating').addClass('highlight');
+
+            $('.average-rating').text(inputAverageRating);
+            $(starCont).addClass('disabled');
+            $('.current-rating').css('width', inStarCont);
+         });
+        
+    }
+
 }
+
 
 starAction();
 
